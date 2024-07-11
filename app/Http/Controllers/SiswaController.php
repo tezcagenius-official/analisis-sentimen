@@ -12,26 +12,29 @@ class SiswaController extends Controller
 {
     public function lihatSiswa(Request $request) {
         $data_siswa = DB::table('siswa')
-            ->addSelect('nama', 'usia', 'jenisKelamin')
-            ->addSelect(DB::raw('kelas.nama AS namaKelas'))
+            ->addSelect('siswa.idSiswa', 'siswa.nama', 'siswa.usia', 'siswa.jenisKelamin')
+            ->addSelect('kelas.namaKelas')
             ->join('kelas', 'kelas.idKelas', '=', 'siswa.idKelas')
             ->paginate(10);
         
         return view('siswa.index')
-            ->with('data', $data_siswa)
+            ->with('data_siswa', $data_siswa)
             ->with('user', Auth::user());
     }
 
-    public function formBuatSiswa(Request $request) {
+    public function formTambahSiswa(Request $request) {
         $data_kelas = DB::table('kelas')
             ->get();
-        
+        $jenis_kelamin = ['Pria', 'Wanita']; 
         return view('siswa.form')
             ->with('data_kelas', $data_kelas)
+            ->with('target_route', 'tambah.siswa')
+            ->with('page_title', 'Tambah Siswa')
+            ->with('jenis_kelamin', $jenis_kelamin)
             ->with('user', Auth::user());
     }
 
-    public function buatSiswa(Request $request) {
+    public function tambahSiswa(Request $request) {
         $inputan_user = $request->only('nama', 'usia', 'jenisKelamin', 'idKelas');
         $aturan_inputan_user = [
             'nama'  => 'required',
@@ -48,10 +51,10 @@ class SiswaController extends Controller
                 ->withInput();
         }
 
-        Session::flash('success', 'Data siswa berhasil ditambahkan');
-        
+        DB::table('siswa')
+            ->insert($inputan_user);
         return redirect()
-            ->route('siswa.index')
+            ->route('daftar.siswa')
             ->with(['success' => 'Data siswa berhasil ditambahkan']);
     }
 
@@ -65,13 +68,16 @@ class SiswaController extends Controller
                 ->with(['error' => 'Data siswa tidak ditemukan']);
         }
 
-
+        $jenis_kelamin = ['Pria', 'Wanita']; 
         $data_kelas = DB::table('kelas')
             ->get();
         
         return view('siswa.form')
             ->with('data_kelas', $data_kelas)
             ->with('data', $data_siswa)
+            ->with('jenis_kelamin', $jenis_kelamin)
+            ->with('target_route', 'ubah.siswa')
+            ->with('page_title', 'Mengubah Siswa')
             ->with('user', Auth::user());
     }
 
@@ -86,8 +92,7 @@ class SiswaController extends Controller
                 ->with(['error' => 'Data siswa tidak ditemukan']);
         }
 
-
-        $inputan_user = $request->only('nama', 'usia', 'jenisKelamin', 'idkelas');
+        $inputan_user = $request->only('nama', 'usia', 'jenisKelamin', 'idKelas');
         $aturan_inputan_user = [
             'nama'  => 'required',
             'usia'  => 'required',  
@@ -103,13 +108,31 @@ class SiswaController extends Controller
                 ->withInput();
         }
 
-        Session::flash('success', 'Data siswa berhasil diubah');
         DB::table('siswa')
             ->where('idSiswa', $idSiswa)
             ->update($inputan_user);
 
         return redirect()
-            ->route('siswa.index')
+            ->route('daftar.siswa')
             ->with(['success' => 'Data siswa berhasil rubah']);
+    }
+
+    public function hapusSiswa(Request $request, $idSiswa) {
+        $data_siswa = DB::table('siswa')
+            ->where('idSiswa', $idSiswa)
+            ->first();
+    
+        if (!$data_siswa) {
+            return back()
+                ->with(['error' => 'Data siswa tidak ditemukan']);
+        } 
+
+        DB::table('siswa')
+            ->where('idSiswa', $idSiswa)
+            ->delete();
+        
+        return redirect()
+            ->route('daftar.siswa')
+            ->with(['success' => 'Data siswa berhasil dihapus']);
     }
 }

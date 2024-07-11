@@ -460,7 +460,7 @@
                         </li>
                         <li><a class="{{ in_array(route_name(), ['daftar.kelas', 'form.tambah.kelas', 'form.ubah.kelas']) ? 'active' : '' }}" href="{{ route('daftar.kelas') }}"><i class="notika-icon notika-mail"></i> Data Kelas</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Interface"><i class="notika-icon notika-edit"></i> Data Siswa</a>
+                        <li><a href="{{ route('daftar.siswa') }}" class="{{ in_array(route_name(), ['daftar.siswa', 'form.tambah.siswa', 'form.ubah.siswa']) ? 'active' : '' }}"><i class="notika-icon notika-edit"></i> Data Siswa</a>
                         </li>
                         <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Data Orang Tua</a>
                         </li>
