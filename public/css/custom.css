@@ -1,0 +1,17 @@
+
+.logo {
+    font-size: 20px;
+    color: white;
+}
+
+.nav-tabs>li>a.active {
+    border-bottom: 2px solid #00c292
+}
+
+.flex {
+    display: flex;
+}
+
+.mx-auto {
+    margin: 0px auto;
+}
