@@ -5,20 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class GuruController extends Controller
 {
-    public function formBuatGuru(Request $request) {
+    public function formTambahGuru(Request $request) {
         return view('guru.form')
+            ->with('target_route', 'tambah.guru')
+            ->with('page_title', 'Tambah Guru')
             ->with('user', Auth::user());
     }
 
-    public function buatGuru(Request $request) {
-        $inputan_user = $request->only('username', 'password');
+    public function tambahGuru(Request $request) {
+        $inputan_user = $request->only('nip', 'nama', 'username', 'password');
         $aturan_inputan_user = [
-            'username'  => 'required|unique:guru',
+            'username'  => 'required|unique:guru,username',
+            'nip'  => 'required|unique:guru,nip',
+            'nama'  => 'required',  
             'password'  => 'required'  
         ];
 
@@ -30,10 +35,12 @@ class GuruController extends Controller
                 ->withInput();
         }
 
+        $inputan_user['password'] = Hash::make($inputan_user['password']);
+
         DB::table('guru')
             ->insertGetId($inputan_user);
         return redirect()
-            ->route('guru.index')
+            ->route('daftar.guru')
             ->with(['success' => 'Data guru berhasil ditambahkan']);
     }
 
@@ -49,6 +56,8 @@ class GuruController extends Controller
 
         return view('guru.form')
             ->with('data', $data_guru)
+            ->with('target_route', 'ubah.guru')
+            ->with('page_title', 'Ubah data guru')
             ->with('user', Auth::user()); 
     }
 
@@ -63,13 +72,24 @@ class GuruController extends Controller
                 ->with(['error' => 'Data guru tidak ditemukan']);
         }
         
-        $inputan_user = $request->only('username', 'password');
+        $inputan_user = $request->only('nip', 'nama', 'username');
         $aturan_inputan_user = [
-            'username'  => 'required|unique:guru',
-            'password'  => 'required'  
+            'username'  => 'required|unique:guru,username,'.$data_guru->idGuru.',idGuru',
+            'nip'  => 'required|unique:guru,nip,'.$data_guru->idGuru.',idGuru',
+            'nama'  => 'required'
         ];
 
+        if (!empty($request->input('password'))) {
+            $aturan_inputan_user['password_lama'] = ['required', function ($attribute, $value, $fail) use ($data_guru) {
+                if (!Hash::check($value, $data_guru->password)) {
+                    return $fail(_('Konfirmasi password lama tidak sesuai'));
+                }
+            }];
+            $inputan_user['password_lama'] = $request->input('password_lama');
+        }
+        
         $validasi = Validator::make($inputan_user, $aturan_inputan_user);
+
         if ($validasi->fails()) {
             return redirect()
                 ->back()
@@ -77,12 +97,17 @@ class GuruController extends Controller
                 ->withInput();
         }
 
+        if (!empty($request->input('password'))) {
+			unset($inputan_user['password_lama']);
+			$inputan_user['password'] = Hash::make($request->input('password'));
+		}
+
         DB::table('guru')
-            ->where('idGuru', $idGuru)
+            ->where('idGuru', $data_guru->idGuru)
             ->update($inputan_user);
-        
+
         return redirect()
-            ->route('guru.index')
+            ->route('daftar.guru')
             ->with(['success' => 'Data guru berhasil diubah']);
     }
 
@@ -90,6 +115,29 @@ class GuruController extends Controller
         $data_guru = DB::table('guru')
             ->paginate(10);
         return view('guru.index')
-            ->with('data', $data_guru);
+            ->with('data_guru', $data_guru);
+    }
+
+    public function hapusGuru(Request $request, $idGuru) {
+        $guru = DB::table('guru')
+            ->where('idGuru', $idGuru)
+            ->first();
+    
+        if (!$guru) {
+            return back()
+                ->with(['error' => 'Data guru tidak ditemukan']);
+        }
+
+        DB::table('kelas')
+            ->where('waliKelas', $idGuru)
+            ->update(['waliKelas' => 0]);
+
+        Session::flash('success', 'Data guru berhasil dihapus');
+        DB::table('guru')
+            ->where('idGuru', $idGuru)
+            ->delete();
+        return redirect()
+            ->route('daftar.guru')
+            ->with(['success' => 'Data guru berhasil hapus']); 
     }
 }

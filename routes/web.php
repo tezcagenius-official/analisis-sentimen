@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AutentikasiController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,13 @@ Route::prefix('siswa')->group(function () {
     Route::post('/ubah', [SiswaController::class, 'ubahSiswa'])->name('ubah.siswa');
     Route::get('/hapus/{idSiswa}', [SiswaController::class, 'hapusSiswa'])->name('hapus.siswa'); 
 });
+
+
+Route::prefix('guru')->group((function () {
+    Route::get('', [GuruController::class, 'lihatGuru'])->name('daftar.guru');
+    Route::get('/tambah', [GuruController::class, 'formTambahGuru'])->name('form.tambah.guru');
+    Route::post('', [GuruController::class, 'tambahGuru'])->name('tambah.guru');
+    Route::get('/ubah/{idGuru}', [GuruController::class, 'formUbahGuru'])->name('form.ubah.guru');
+    Route::post('/ubah', [GuruController::class, 'ubahGuru'])->name('ubah.guru');
+    Route::get('/hapus/{idGuru}', [GuruController::class, 'hapusGuru'])->name('hapus.guru');
+}));
