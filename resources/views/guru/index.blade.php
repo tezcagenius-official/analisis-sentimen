@@ -6,7 +6,14 @@
             <div class="normal-table-list">
                 <div class="basic-tb-hd">
                     <h2>Data Guru</h2>
-                    <a href="{{ route('form.tambah.guru') }}" class="btn btn-success notika-btn-success waves-effect">Tambah Data Guru</a>
+                    <div class="flex justify-between">
+                        <a href="{{ route('form.tambah.guru') }}" class="btn btn-success notika-btn-success waves-effect">Tambah Guru</a>
+                        <div class="nk-int-st" style="width: 40%">
+                            <form action="{{ route('daftar.guru') }}" method="GET">
+                                <input type="text" name="query" class="form-control input-md" placeholder="Cari berdasarkan Nama atau NIP" value="{{ Request::get('query') }}">
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="bsc-tbl-st">
                     <table class="table table-striped">

@@ -5,16 +5,17 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware(AuthMiddleware::class);
 
 Route::get('/login', function () {
     return view('login');
 });
 Route::post('/login', [AutentikasiController::class, 'login'])->name('login');
 
-Route::prefix('kelas')->group((function () {
+Route::prefix('kelas')->middleware(AuthMiddleware::class)->group((function () {
     Route::get('', [KelasController::class, 'lihatKelas'])->name('daftar.kelas');
     Route::get('/tambah', [KelasController::class, 'formTambahKelas'])->name('form.tambah.kelas');
     Route::post('', [KelasController::class, 'tambahKelas'])->name('tambah.kelas');
@@ -23,7 +24,7 @@ Route::prefix('kelas')->group((function () {
     Route::get('/hapus/{idKelas}', [KelasController::class, 'hapusKelas'])->name('hapus.kelas');
 }));
 
-Route::prefix('siswa')->group(function () {
+Route::prefix('siswa')->middleware(AuthMiddleware::class)->group(function () {
     Route::get('', [SiswaController::class, 'lihatSiswa'])->name('daftar.siswa');
     Route::get('/tambah', [SiswaController::class, 'formTambahSiswa'])->name('form.tambah.siswa');
     Route::post('', [SiswaController::class, 'tambahSiswa'])->name('tambah.siswa');
@@ -33,7 +34,7 @@ Route::prefix('siswa')->group(function () {
 });
 
 
-Route::prefix('guru')->group((function () {
+Route::prefix('guru')->middleware(AuthMiddleware::class)->group((function () {
     Route::get('', [GuruController::class, 'lihatGuru'])->name('daftar.guru');
     Route::get('/tambah', [GuruController::class, 'formTambahGuru'])->name('form.tambah.guru');
     Route::post('', [GuruController::class, 'tambahGuru'])->name('tambah.guru');

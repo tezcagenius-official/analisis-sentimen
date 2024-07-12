@@ -15,7 +15,7 @@ class GuruController extends Controller
         return view('guru.form')
             ->with('target_route', 'tambah.guru')
             ->with('page_title', 'Tambah Guru')
-            ->with('user', Auth::user());
+            ->with('user', $request->session()->get('user'));
     }
 
     public function tambahGuru(Request $request) {
@@ -58,7 +58,7 @@ class GuruController extends Controller
             ->with('data', $data_guru)
             ->with('target_route', 'ubah.guru')
             ->with('page_title', 'Ubah data guru')
-            ->with('user', Auth::user()); 
+            ->with('user', $request->session()->get('user'));
     }
 
     public function ubahGuru(Request $request) {
@@ -112,9 +112,14 @@ class GuruController extends Controller
     }
 
     public function lihatGuru(Request $request) {
-        $data_guru = DB::table('guru')
-            ->paginate(10);
+        $query = DB::table('guru');
+        if ($request->has('query')) {
+            $query->where('guru.nama', 'LIKE', '%'. $request->get('query') . '%')
+                ->orWhere('guru.nip', 'LIKE', '%' . $request->query('query') . '%');
+        }
+        $data_guru = $query->get();
         return view('guru.index')
+            ->with('user', $request->session()->get('user'))
             ->with('data_guru', $data_guru);
     }
 

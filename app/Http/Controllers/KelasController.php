@@ -11,13 +11,19 @@ use Illuminate\Support\Facades\Validator;
 class KelasController extends Controller
 {
     public function lihatKelas(Request $request) {
-        $data_kelas = DB::table('kelas')
+        $query = DB::table('kelas')
             ->addSelect('kelas.idKelas')
             ->addSelect('kelas.namaKelas')
             ->addSelect(DB::raw('guru.nama AS waliKelas'))
-            ->leftJoin('guru', 'guru.idGuru', '=', 'kelas.waliKelas')
-            ->paginate(10);
+            ->leftJoin('guru', 'guru.idGuru', '=', 'kelas.waliKelas');
         
+        if ($request->has('query')) {
+            $query
+                ->where('kelas.namaKelas', 'LIKE', '%' . $request->get('query'). '%')
+                ->orWhere('guru.nama', 'LIKE', '%'. $request->get('query') . '%');
+        } 
+        
+        $data_kelas = $query->get();
         foreach ($data_kelas as $urutan => $kelas) {
             $data_siswa = DB::table('siswa')
                 ->where('idKelas', $kelas->idKelas)
@@ -26,7 +32,7 @@ class KelasController extends Controller
         }
 
         return view('kelas.index')
-            ->with('user', Auth::user())
+            ->with('user', $request->session()->get('user'))
             ->with('data_kelas', $data_kelas);
     }
 
@@ -37,7 +43,7 @@ class KelasController extends Controller
             ->with('page_title', 'Menambahkan data kelas')
             ->with('target_route', 'tambah.kelas')
             ->with('data', NULL)
-            ->with('user', Auth::user());
+            ->with('user', $request->session()->get('user'));
     }
 
     public function tambahKelas(Request $request) {
@@ -92,7 +98,7 @@ class KelasController extends Controller
             ->with('page_title', 'Mengubah data kelas')
             ->with('target_route', 'ubah.kelas')
             ->with('data_guru', $data_guru)
-            ->with('user', Auth::user()); 
+            ->with('user', $request->session()->get('user'));
     }
 
     public function ubahKelas(Request $request) {

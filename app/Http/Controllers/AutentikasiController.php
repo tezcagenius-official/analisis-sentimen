@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Constant\Runtime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use stdClass;
 
 class AutentikasiController extends Controller
 {
     const ROLE_ADMIN = 0;
+    const ROLE_GURU = 0;
     public function login(Request $request) {
         $user_input = $request->only('username', 'password');
         $user_input_field_rules = [
@@ -24,6 +27,7 @@ class AutentikasiController extends Controller
                 ->withInput();
         }
 
+        $user_record = new stdClass();
         $admin_record = DB::table('admin')
             ->where('username', $user_input['username'])
             ->first();
@@ -35,8 +39,13 @@ class AutentikasiController extends Controller
                     ->withErrors(['password' => 'Password tidak sesuai'])
                     ->withInput();
            }
-           $request->session()->put('role', self::ROLE_ADMIN);
-           $request->session()->put('user', $admin_record);
+
+           $user_record->id = $admin_record->idAdmin;
+           $user_record->nama = $admin_record->username;
+           $user_record->role_type = Runtime::ROLE_ADMIN;
+           $user_record->nama_role = 'Admin';
+
+           $request->session()->put('user', $user_record);
            return redirect()
                 ->route('dashboard');
         }
@@ -46,13 +55,24 @@ class AutentikasiController extends Controller
             ->first();
         
         if ($teacher_record) {
-           $match = Hash::check($user_input['password'], $teacher_record->password);
-           if (!$match) {
-                return back()
-                    ->withErrors(['password' => 'Password tidak sesuai'])
-                    ->withInput();
-           }
+            $match = Hash::check($user_input['password'], $teacher_record->password);
+            if (!$match) {
+                    return back()
+                        ->withErrors(['password' => 'Password tidak sesuai'])
+                        ->withInput();
+            }
+
+            $user_record->id = $teacher_record->idGuru;
+            $user_record->nama = $teacher_record->nama;
+            $user_record->role_type = Runtime::ROLE_GURU;
+            $user_record->nama_role = 'Guru';
+            $request->session()->put('user', $user_record);
+            return redirect()
+                ->route('dashboard');
         }
 
+        return back()
+            ->withErrors(['password' => 'Username atau password tidak sesuai'])
+            ->withInput();
     }
 }

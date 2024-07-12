@@ -11,15 +11,18 @@ use Illuminate\Support\Facades\Validator;
 class SiswaController extends Controller
 {
     public function lihatSiswa(Request $request) {
-        $data_siswa = DB::table('siswa')
+        $query = DB::table('siswa')
             ->addSelect('siswa.idSiswa', 'siswa.nama', 'siswa.usia', 'siswa.jenisKelamin')
             ->addSelect('kelas.namaKelas')
-            ->join('kelas', 'kelas.idKelas', '=', 'siswa.idKelas')
-            ->paginate(10);
+            ->join('kelas', 'kelas.idKelas', '=', 'siswa.idKelas');
         
+        if ($request->has('query')) {
+            $query->where('siswa.nama', 'LIKE', '%'. $request->get('query') . '%');
+        }
+        $data_siswa = $query->get();
         return view('siswa.index')
             ->with('data_siswa', $data_siswa)
-            ->with('user', Auth::user());
+            ->with('user', $request->session()->get('user'));
     }
 
     public function formTambahSiswa(Request $request) {
@@ -31,7 +34,7 @@ class SiswaController extends Controller
             ->with('target_route', 'tambah.siswa')
             ->with('page_title', 'Tambah Siswa')
             ->with('jenis_kelamin', $jenis_kelamin)
-            ->with('user', Auth::user());
+            ->with('user', $request->session()->get('user'));
     }
 
     public function tambahSiswa(Request $request) {
@@ -75,10 +78,10 @@ class SiswaController extends Controller
         return view('siswa.form')
             ->with('data_kelas', $data_kelas)
             ->with('data', $data_siswa)
+            ->with('user', $request->session()->get('user'))
             ->with('jenis_kelamin', $jenis_kelamin)
             ->with('target_route', 'ubah.siswa')
-            ->with('page_title', 'Mengubah Siswa')
-            ->with('user', Auth::user());
+            ->with('page_title', 'Mengubah Siswa');
     }
 
     public function ubahSiswa(Request $request) {

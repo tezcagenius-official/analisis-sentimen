@@ -15,3 +15,7 @@
 .mx-auto {
     margin: 0px auto;
 }
+
+.justify-between {
+    justify-content: space-between;
+}

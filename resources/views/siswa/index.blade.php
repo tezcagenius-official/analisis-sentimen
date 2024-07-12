@@ -6,7 +6,14 @@
             <div class="normal-table-list">
                 <div class="basic-tb-hd">
                     <h2>Data Siswa</h2>
-                    <a href="{{ route('form.tambah.siswa') }}" class="btn btn-success notika-btn-success waves-effect">Tambah Data Siswa</a>
+                    <div class="flex justify-between">
+                        <a href="{{ route('form.tambah.siswa') }}" class="btn btn-success notika-btn-success waves-effect">Tambah Siswa</a>
+                        <div class="nk-int-st" style="width: 40%">
+                            <form action="{{ route('daftar.siswa') }}" method="GET">
+                                <input type="text" name="query" class="form-control input-md" placeholder="Cari berdasarkan nama siswa" value="{{ Request::get('query') }}">
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="bsc-tbl-st">
                     <table class="table table-striped">
