@@ -1,0 +1,243 @@
+[
+    {
+      "id": 1,
+      "question": "Berapa banyak jam per hari Anda menggunakan Internet secara aktif?",
+      "option": [
+        "1-2 Jam",
+        "3-4 Jam",
+        "Lebih dari 4 Jam"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 2,
+      "question": "Untuk tujuan apa Anda biasanya menggunakan internet? ",
+      "option": [
+        "Mencari informasi",
+        "Mengakses media sosial",
+        "Mengerjakan tugas sekolah",
+        "Bermain game online"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 3,
+      "question": "Seberapa sering Anda menggunakan internet untuk kegiatan belajar? ",
+      "option": [
+        "Sering",
+        "Kadang-kadang",
+        "Jarang"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 4,
+      "question": "Apakah Anda merasa penggunaan internet membantu Anda dalam belajar?  ",
+      "option": [
+        "Cukup membantu",
+        "Sangat membantu"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 5,
+      "question": "Berapa persen dari total waktu penggunaan internet yang Anda habiskan untuk kegiatan belajar? ",
+      "option": [
+        "10-30%",
+        "30-50%",
+        "Kurang dari 10%",
+        "Lebih dari 50%"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 6,
+      "question": "Berapa Anda menilai minat belajar Anda saat ini?",
+      "option": [
+        "Sedang",
+        "Rendah",
+        "Tinggi"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 7,
+      "question": "Seberapa sering Anda menyelesaikan tugas sekolah tepat waktu?  ",
+      "option": [
+        "Kadang-kadang",
+        "Selalu",
+        "Sering"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 8,
+      "question": "Seberapa besar pengaruh internet terhadap minat belajar Anda?  ",
+      "option": [
+        "Sedang",
+        "Besar",
+        "Sangat Besar"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 9,
+      "question": "Apakah Anda lebih suka belajar dengan bantuan internet atau tanpa internet? ",
+      "option": [
+        "Kedua-duanya sama saja",
+        "Dengan bantuan internet",
+        "Tanpa internet"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 10,
+      "question": "Apakah Anda sering melihat konten edukasi atau materi belajar di media sosial seperti Facebook, Twitter, dan Instagram? ",
+      "option": [
+        "Jarang",
+        "Sering"
+      ],
+      "type": "radio"
+    },
+    {
+      "id": 11,
+      "question": "Dalam proses belajar online, apakah Anda lebih menggemari interaktivitas langsung dengan guru ataupun belajar secara independen dengan menggunakan konten online? ",
+      "option": [
+        "Belajar secara independen",
+        "Interaktivitas langsung dengan guru",
+        "Mereka sama penting"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 12,
+      "question": "Apakah Anda merasa bahwa penggunaan Internet membantu Anda memahami materi pelajaran dengan lebih baik?  ",
+      "option": [
+        "Tidak",
+        "Tidak Yakin",
+        "Ya"
+      ],
+      "type": "radio"
+    },
+    {
+      "id": 13,
+      "question": "Apakah Anda merasa bahwa penggunaan Internet membantu Anda meningkatkan keterampilan teknologi informasi dan komunikasi (TIK)?  ",
+      "option": [
+        "Tidak Yakin",
+        "Ya"
+      ],
+      "type": "radio"
+    },
+    {
+      "id": 14,
+      "question": "Apakah Anda merasa bahwa penggunaan Internet membantu Anda meningkatkan kreativitas dalam belajar? ",
+      "option": [
+        "Ya",
+        "Mungkin"
+      ],
+      "type": "radio"
+    },
+    {
+      "id": 15,
+      "question": "Seberapa sering Anda menggunakan Internet untuk mencari sumber belajar tambahan di luar materi yang diberikan di sekolah? ",
+      "option": [
+        "Beberapa Kali seminggu",
+        "Setiap Hari",
+        "Jarang"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 16,
+      "question": "Apakah Anda merasa bahwa penggunaan Internet membantu Anda meningkatkan kemampuan memahami konsep matematika dan ilmu pengetahuan lainnya?",
+      "option": [
+        "Tidak Yakin",
+        "Ya"
+      ],
+      "type": "radio"
+    },
+    {
+      "id": 17,
+      "question": "Apakah anda merasa penggunaan internet membantu meningkatkan minat belajar anda?",
+      "option": [
+        "Tidak Yakin",
+        "Ya",
+        "Mungkin"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 18,
+      "question": "Menurut Anda, apa keuntungan terbesar dari penggunaan internet dalam belajar?",
+      "option": [
+        "Kemudahan dalam mencari referensi",
+        "Ketersediaan bahan belajar yang interaktif",
+        "Akses informasi yang cepat"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 19,
+      "question": "Apakah Anda pernah merasa terganggu dengan penggunaan internet saat belajar? ",
+      "option": [
+        "Ya, kadang-kadang",
+        "Ya, sering",
+        "Tidak pernah"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 20,
+      "question": "Apakah Anda merasa bahwa penggunaan internet dapat meningkatkan prestasi belajar Anda?  ",
+      "option": [
+        "Setuju",
+        "Sangat setuju",
+        "Tidak setuju"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 21,
+      "question": "Apakah sekolah Anda memberikan arahan atau panduan mengenai penggunaan internet untuk belajar?  ",
+      "option": [
+        "Ya",
+        "Tidak"
+      ],
+      "type": "radio"
+    },
+    {
+      "id": 22,
+      "question": "Jika ada, sebutkan satu kendala terbesar yang Anda hadapi dalam penggunaan internet untuk belajar",
+      "option": [
+        "Tidak ada",
+        "Jaringan",
+        "Kuota",
+        "Jaringan internet suka lambat",
+        "Kendala ketika jaringan internet mati",
+        "Kadang kala jawaban sesuai kadang kala tidak",
+        "kuota terbatas",
+        "Kadang tidak paham karna penjelasan di internet kurang jelas dan detail",
+        "Terdistraksi oleh sosial media atau hal lainnya di internet"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 23,
+      "question": "Menurut Anda, bagaimana cara terbaik memanfaatkan internet untuk meningkatkan minat belajar?",
+      "option": [
+        "Mengakses video pembelajaran",
+        "Bergabung dalam forum diskusi online",
+        "Menggunakan aplikasi belajar online"
+      ],
+      "type": "select"
+    },
+    {
+      "id": 24,
+      "question": "Apakah Anda merasa bahwa penggunaan Internet membantu Anda menyelesaikan tugas-tugas sekolah dengan lebih efisien?",
+      "option": [
+        "Ya",
+        "Tidak Yakin"
+      ],
+      "type": "radio"
+    }
+  ]

@@ -1,0 +1,40 @@
+[
+    {
+        "id": 1,
+        "question": "Kartu",
+        "option": [
+            "Prabayar",
+            "Pascabayar"
+        ],
+        "type": "select"
+    },
+    {
+        "id": 2,
+        "question": "Panggilan",
+        "option": [
+            "Sedikit",
+            "Banyak",
+            "Cukup"
+        ],
+        "type": "select"
+    },
+    {
+        "id": 3,
+        "question": "Blok",
+        "option": [
+            "Sedang",
+            "Tinggi",
+            "Rendah"
+        ],
+        "type": "select"
+    },
+    {
+        "id": 4,
+        "question": "Bonus",
+        "option": [
+            "Ya",
+            "Tidak"
+        ],
+        "type": "select"
+    }
+]

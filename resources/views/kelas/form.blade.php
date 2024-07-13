@@ -2,7 +2,7 @@
 
 @section('main')
 <div class="row mg-t-20 flex">
-<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mx-auto">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mx-auto">
         <form action="{{ route($target_route) }}" method="POST">
             @csrf
             <div class="form-example-wrap">

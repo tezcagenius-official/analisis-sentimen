@@ -1,0 +1,68 @@
+[
+    {
+        "p1": "Prabayar",
+        "p2": "Sedikit",
+        "p3": "Sedang",
+        "p4": "Tidak"
+    },
+    {
+        "p1": "Pascabayar",
+        "p2": "Banyak",
+        "p3": "Sedang",
+        "p4": "Ya"
+    },
+    {
+        "p1": "Prabayar",
+        "p2": "Banyak",
+        "p3": "Sedang",
+        "p4": "Ya"
+    },
+    {
+        "p1": "Prabayar",
+        "p2": "Banyak",
+        "p3": "Rendah",
+        "p4": "Tidak"
+    },
+    {
+        "p1": "Pascabayar",
+        "p2": "Cukup",
+        "p3": "Tinggi",
+        "p4": "Ya"
+    },
+    {
+        "p1": "Pascabayar",
+        "p2": "Cukup",
+        "p3": "Sedang",
+        "p4": "Ya"
+    },
+    {
+        "p1": "Prabayar",
+        "p2": "Cukup",
+        "p3": "Sedang",
+        "p4": "Ya"
+    },
+    {
+        "p1": "Prabayar",
+        "p2": "Cukup",
+        "p3": "Rendah",
+        "p4": "Tidak"
+    },
+    {
+        "p1": "Pascabayar",
+        "p2": "Sedikit",
+        "p3": "Tinggi",
+        "p4": "Ya"
+    },
+    {
+        "p1": "Pascabayar",
+        "p2": "Banyak",
+        "p3": "Tinggi",
+        "p4": "Ya"
+    },
+    {
+        "p1": "Pascabayar",
+        "p2": "Sedikit",
+        "p3": "Rendah",
+        "p4": "Ya"
+    }
+]

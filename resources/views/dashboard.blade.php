@@ -7,7 +7,7 @@
             <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
                 <div class="website-traffic-ctn">
                     <h2><span class="counter">50,000</span></h2>
-                    <p>Total Website Traffics</p>
+                    <p>Total Guru</p>
                 </div>
                 <div class="sparkline-bar-stats1"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div>
             </div>
@@ -16,7 +16,7 @@
             <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
                 <div class="website-traffic-ctn">
                     <h2><span class="counter">90,000</span>k</h2>
-                    <p>Website Impressions</p>
+                    <p>Total Kelas</p>
                 </div>
                 <div class="sparkline-bar-stats2"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div>
             </div>
