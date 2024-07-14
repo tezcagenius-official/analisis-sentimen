@@ -137,6 +137,10 @@ class SiswaController extends Controller
                 ->with(['error' => 'Data siswa tidak ditemukan']);
         } 
 
+        DB::table('kuisioner')
+            ->where('idSiswa', $idSiswa)
+            ->delete();
+
         DB::table('siswa')
             ->where('idSiswa', $idSiswa)
             ->delete();

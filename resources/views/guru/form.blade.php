@@ -62,7 +62,7 @@
                     <div class="nk-int-st">
                         <input type="password" name="password" class="form-control input-sm" placeholder="Masukan password {{ empty($data) ? ''  : 'baru'}}" value=""> 
                     </div>
-                    @error('    ')
+                    @error('password')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror 
                 </div>

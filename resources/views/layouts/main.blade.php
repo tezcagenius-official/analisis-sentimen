@@ -106,7 +106,7 @@
                         <li><a href="{{ route('daftar.kuisioner') }}" class="{{ in_array(route_name(), ['daftar.kuisioner', 'form.tambah.kuisioner', 'form.ubah.kuisioner', 'lihat.analisa.kuisioner']) ? 'active' : '' }}"></i>Data Kuisioner</a>
                         </li>
                         @if ($user->role_type == \App\Constant\Runtime::ROLE_ADMIN)
-                        <li><a href="{{ route('analisa.kesimpulan') }}" class="{{ in_array(route_name(), ['analisa.kesimpulan']) ? 'active' : '' }}"><i class="notika-icon notika-form"></i>Hasil Analisa</a>
+                        <li><a href="{{ route('analisa.kuisioner') }}" class="{{ in_array(route_name(), ['analisa.kesimpulan']) ? 'active' : '' }}"><i class="notika-icon notika-form"></i>Hasil Analisa</a>
                         </li>
                         @endif
                     </ul>
