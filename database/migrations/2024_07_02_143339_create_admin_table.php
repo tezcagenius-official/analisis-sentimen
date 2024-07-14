@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('admin', function (Blueprint $table) {
             $table->unsignedBigInteger('idAdmin', true);
             $table->string('username', 30);
-            $table->string('password', 30);
+            $table->string('password', 100);
         });
     }
 
