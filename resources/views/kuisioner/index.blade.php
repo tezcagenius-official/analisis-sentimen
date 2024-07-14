@@ -7,7 +7,11 @@
                 <div class="basic-tb-hd">
                     <h2>Data Kuisioner</h2>
                     <div class="flex justify-between">
-                        <a href="{{ route('form.tambah.kuisioner') }}" class="btn btn-success notika-btn-success waves-effect">Tambah Data Kuisioner</a>
+                        @if ($user->role_type == \App\Constant\Runtime::ROLE_ADMIN)
+                            <a href="{{ route('form.tambah.kuisioner') }}" class="btn btn-success notika-btn-success waves-effect">Tambah Data Kuisioner</a>
+                        @else
+                            <div></div>
+                        @endif
                         <div class="nk-int-st" style="width: 40%">
                             <form action="{{ route('daftar.kuisioner') }}" method="GET">
                                 <input type="text" name="query" class="form-control input-md" placeholder="Cari berdasarkan nama siswa" value="{{ Request::get('query') }}">
@@ -30,9 +34,13 @@
                                     <td>{{ $index+1 }}</td>
                                     <td>{{ $kuisioner->namaSiswa }}</td>
                                     <td>
-                                        <a href="{{ route('form.ubah.kuisioner', ['idKuisioner' => $kuisioner->idKuisioner]) }}">Ubah</a>
+                                        @if ($user->role_type == \App\Constant\Runtime::ROLE_ADMIN)
+                                            <a href="{{ route('form.ubah.kuisioner', ['idKuisioner' => $kuisioner->idKuisioner]) }}">Ubah</a>
+                                        @endif
                                         <a href="{{ route('lihat.analisa.kuisioner', ['idKuisioner' => $kuisioner->idKuisioner]) }}">Lihat Perhitungan Analisa</a>
-                                        <a href="{{ route('hapus.kuisioner', ['idKuisioner' => $kuisioner->idKuisioner]) }}">Hapus</a>
+                                        @if ($user->role_type == \App\Constant\Runtime::ROLE_ADMIN)
+                                            <a href="{{ route('hapus.kuisioner', ['idKuisioner' => $kuisioner->idKuisioner]) }}">Hapus</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_latih', function (Blueprint $table) {
-            $table->unsignedBigInteger('idDataLatih', true);
-            $table->text('jawaban');
+        Schema::table('siswa', function (Blueprint $table) {
+            $table->string('kodeSiswa', 10)->after('idSiswa')->default('');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_dataset');
+        Schema::table('siswa', function (Blueprint $table) {
+            $table->dropColumn('kodeSiswa');
+        });
     }
 };

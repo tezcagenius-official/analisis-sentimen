@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalisaController;
 use App\Http\Controllers\AutentikasiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuruController;
@@ -55,4 +56,6 @@ Route::prefix('kuisioner')->middleware(AuthMiddleware::class)->group(function ()
     Route::get('/hapus/{idKuisioner}', [KuisionerController::class, 'hapusKuisioner'])->name('hapus.kuisioner');
 });
 
-Route::get('/hasil', [KuisionerController::class, 'analisaKesimpulan'])->name('analisa.kesimpulan');
+Route::get('/hasil', [AnalisaController::class, 'lihatAnalisa'])->name('analisa.kesimpulan');
+Route::post('/hasil', [AnalisaController::class, 'lihatAnalisa'])->name('lihat.analisa.kesimpulan');
+Route::get('/keluar', [AutentikasiController::class, 'keluar'])->name('keluar')->middleware(AuthMiddleware::class);;

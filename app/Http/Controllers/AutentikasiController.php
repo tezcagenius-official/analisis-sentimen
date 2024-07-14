@@ -62,10 +62,14 @@ class AutentikasiController extends Controller
                         ->withInput();
             }
 
+            $data_kelas = DB::table('kelas')
+                ->where('waliKelas', $teacher_record->idGuru)
+                ->first();
             $user_record->id = $teacher_record->idGuru;
             $user_record->nama = $teacher_record->nama;
             $user_record->role_type = Runtime::ROLE_GURU;
             $user_record->nama_role = 'Guru';
+            $user_record->kelas = $data_kelas;
             $request->session()->put('user', $user_record);
             return redirect()
                 ->route('dashboard');
@@ -74,5 +78,11 @@ class AutentikasiController extends Controller
         return back()
             ->withErrors(['password' => 'Username atau password tidak sesuai'])
             ->withInput();
+    }
+
+    public function keluar(Request $request) {
+        $request->session()->forget('user'); 
+        return redirect()
+            ->route('login');
     }
 }

@@ -2,22 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Constant\Runtime;
+use App\Helper\Common;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class SiswaController extends Controller
 {
     public function lihatSiswa(Request $request) {
         $query = DB::table('siswa')
-            ->addSelect('siswa.idSiswa', 'siswa.nama', 'siswa.usia', 'siswa.jenisKelamin')
+            ->addSelect('siswa.idSiswa', 'siswa.nama', 'siswa.usia', 'siswa.jenisKelamin', 'siswa.kodeSiswa')
             ->addSelect('kelas.namaKelas')
             ->join('kelas', 'kelas.idKelas', '=', 'siswa.idKelas');
         
         if ($request->has('query')) {
             $query->where('siswa.nama', 'LIKE', '%'. $request->get('query') . '%');
+        }
+
+        $user = $request->session()->get('user');
+
+        if ($user->role_type == Runtime::ROLE_GURU) {
+            $query->where('kelas.waliKelas', '=', $user->id);
         }
         $data_siswa = $query->get();
         return view('siswa.index')
@@ -54,6 +60,7 @@ class SiswaController extends Controller
                 ->withInput();
         }
 
+        $inputan_user['kodeSiswa'] = strtoupper(Common::generateRandomCode());
         DB::table('siswa')
             ->insert($inputan_user);
         return redirect()

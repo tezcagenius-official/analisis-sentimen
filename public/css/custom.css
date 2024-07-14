@@ -19,3 +19,7 @@
 .justify-between {
     justify-content: space-between;
 }
+
+.text-success {
+    color: #00c292;;
+}

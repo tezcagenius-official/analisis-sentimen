@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BayesAlgorithm;
+use App\Constant\Runtime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -13,10 +14,17 @@ class KuisionerController extends Controller
     public function lihatKuisioner(Request $request) {
         $query = DB::table('kuisioner')
             ->addSelect('kuisioner.idKuisioner', DB::raw('siswa.nama AS namaSiswa'), 'kuisioner.kuisioner')
-            ->join('siswa', 'siswa.idSiswa', '=', 'kuisioner.idSiswa');
+            ->join('siswa', 'siswa.idSiswa', '=', 'kuisioner.idSiswa')
+            ->join('kelas', 'siswa.idKelas', '=', 'kelas.idKelas');
         
         if ($request->has('query')) {
             $query->where('siswa.nama', 'LIKE', '%'.$request->get('query'). '%');
+        }
+
+        $user = $request->session()->get('user');
+
+        if ($user->role_type == Runtime::ROLE_GURU) {
+            $query->where('kelas.waliKelas', '=', $user->id);
         }
 
         $data_kuisioner = $query->get();
