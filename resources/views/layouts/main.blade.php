@@ -71,7 +71,10 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="logo-area">
-                        <a href="#" class="logo">Analisis Sentimen</a>
+                        <a href="#" class="logo">
+                          <img src="{{ URL::asset('img/yapida.jpg') }}" alt="" width="60" height="60">
+                          SMP S Islam Cikuda
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
@@ -86,7 +89,7 @@
     </div>
     <!-- End Header Top Area -->
     <!-- Main Menu area start-->
-    <div class="main-menu-area" style="background-color: white;">
+    <div class="main-menu-area" style="background-color: white; border-bottom: 1px solid #d5d5d5;">
         <div class="container">
             <div class="row">
                     <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
@@ -106,7 +109,7 @@
                         <li><a href="{{ route('daftar.kuisioner') }}" class="{{ in_array(route_name(), ['daftar.kuisioner', 'form.tambah.kuisioner', 'form.ubah.kuisioner', 'lihat.analisa.kuisioner']) ? 'active' : '' }}"></i>Data Kuisioner</a>
                         </li>
                         @if ($user->role_type == \App\Constant\Runtime::ROLE_ADMIN)
-                        <li><a href="{{ route('analisa.kuisioner') }}" class="{{ in_array(route_name(), ['analisa.kesimpulan']) ? 'active' : '' }}"><i class="notika-icon notika-form"></i>Hasil Analisa</a>
+                        <li><a href="{{ route('analisa.kuisioner') }}" class="{{ in_array(route_name(), ['analisa.kuisioner']) ? 'active' : '' }}"><i class="notika-icon notika-form"></i>Hasil Analisa</a>
                         </li>
                         @endif
                     </ul>

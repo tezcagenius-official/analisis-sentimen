@@ -60,7 +60,8 @@
     <!-- Login Register area Start-->
     <div class="login-content">
         <!-- Login -->
-        <div class="nk-block toggled" id="l-login">
+        <div class="nk-block toggled" id="l-login" >
+            <img src="{{ URL::asset('img/yapida.jpg') }}" alt="" width="100" height="100">
             <form action="{{ route('login') }}" method="POST" class="nk-form">
                 @csrf
                 <h1>Masuk</h1>
